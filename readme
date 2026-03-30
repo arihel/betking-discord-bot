@@ -1,0 +1,74 @@
+# 🎰 BetKing - Discord Betting Bot
+
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+![Discord.py](https://img.shields.io/badge/discord.py-5865F2?style=for-the-badge&logo=discord&logoColor=white)
+![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white)
+![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
+
+O **BetKing** é um bot de economia virtual e apostas dinâmicas para Discord, desenvolvido com foco em modularidade, segurança e experiência do usuário (UX). O sistema permite a gestão completa de eventos esportivos ou competitivos, com cálculo automático de prêmios baseado em volume de apostas.
+
+---
+
+## 📸 Demonstração
+> **Nota do Autor:** Como Motion Designer, pretendo substituir esta prévia por um GIF demonstrativo da interface do bot em breve.
+![Showcase do Bot](https://via.placeholder.com/800x400?text=Demonstração+dos+Slash+Commands)
+
+---
+
+## 🚀 Funcionalidades
+
+### 💳 Economia & Usuários
+* **Sistema de Carteira:** Registro automático com bônus inicial de 1000 pontos.
+* **Privacidade Financeira:** Comandos de saldo e erros utilizam mensagens efêmeras (visíveis apenas para o usuário).
+* **Transferências P2P:** Envio de pontos entre membros com validação rigorosa de fundos e prevenção de auto-envio.
+
+### 🎲 Mercado de Apostas (CRUD Modular)
+* **Gestão de Eventos:** Criação, edição e exclusão de eventos via interface administrativa.
+* **Lógica de Estorno (Refund):** Caso um evento seja cancelado/excluído, todos os pontos apostados retornam automaticamente para as contas dos usuários, garantindo a integridade da economia.
+* **Odds Dinâmicas:** O prêmio é calculado em tempo real seguindo o modelo *Pari-Mutuel*:
+  $$Prêmio = Valor Apostado \times \left( \frac{Pote Total}{Total no Vencedor} \right)$$
+* **Finalização Automatizada:** Distribuição de lucros aos vencedores com apenas um clique.
+
+---
+
+## 🛠️ Arquitetura do Projeto
+
+O projeto utiliza uma arquitetura modular baseada em **Cogs**, facilitando a manutenção e a escalabilidade:
+
+```text
+📁 bot-bet-king/
+├── 📁 cogs/                # Módulos de comandos independentes
+│   ├── 📄 economia.py      # Gestão de pontos e usuários
+│   └── 📄 apostas.py       # Gestão de eventos e pagamentos
+├── 📄 database.py          # Camada de abstração e conexão SQLite
+├── 📄 main.py              # Ponto de entrada e carregamento de Cogs
+├── 📄 Dockerfile          # Containerização da aplicação
+├── 📄 requirements.txt     # Dependências do projeto
+└── 📄 .env                 # Token de acesso (não incluído no repositório)
+
+⚙️ Como Rodar o Projeto
+Pré-requisitos
+Python 3.10+ ou Docker Desktop
+
+Token de Bot do Discord (obtido no Developer Portal)
+
+1. Clone o repositório
+git clone [https://github.com/SEU_USUARIO/betking-discord-bot.git](https://github.com/SEU_USUARIO/betking-discord-bot.git)
+cd betking-discord-bot
+
+2. Configure as variáveis de ambiente
+Crie um arquivo .env e adicione seu token:
+DISCORD_TOKEN=seu_token_aqui
+
+3. Rode com Docker (Recomendado)
+docker build -t betking-bot .
+docker run -d --name betking -v "$(pwd)/cassino.db:/app/cassino.db" betking-bot
+
+🛡️ Segurança e Boas Práticas
+Proteção de Credenciais: O arquivo .env e o banco de dados local estão protegidos via .gitignore.
+
+Validação de Input: Todos os comandos possuem travas contra valores negativos ou manipulações indevidas.
+
+Permissões: Comandos administrativos protegidos por checagem de permissão nativa do Discord.
+
+Desenvolvido por Arihel Secron - Bacharel em Sistemas de Informação & Motion Designer.
