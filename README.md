@@ -82,7 +82,7 @@ docker run -d --name betking -v "$(pwd)/cassino.db:/app/cassino.db" betking-bot
 ---
 
 ## 🛡️ Foco em Cybersecurity
-Como estudante de Sistemas de Informação focado em segurança, o projeto implementa:
+Buscando um desenvolvimento focado em boas práticas de cibersegurança, o projeto implementa:
 
 * **Prevenção de SQL Injection:** Queries parametrizadas com placeholders `?`.
 * **Segurança de Credenciais:** Isolamento completo via variáveis de ambiente (`.env`).
