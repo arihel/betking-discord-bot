@@ -92,14 +92,9 @@ Buscando um desenvolvimento focado em boas práticas de cibersegurança, o proje
 
 <p align="center">
   Desenvolvido com ☕ por <strong>Arihel Secron</strong><br>
-  <em>Motion Designer & Estudante de Sistemas de Informação</em><br><br>
+  <em>Motion Designer & Bacharel de Sistemas de Informação</em><br><br>
   <a href="[https://github.com/arihel](https://github.com/arihel)">GitHub</a> • <a href="[https://linkedin.com/in/arihelsecron](https://linkedin.com/in/arihelsecron)">LinkedIn</a>
 </p>
-
-
-
-Motion Designer & Bacharel de Sistemas de Informação
-
 
 
 <a href="https://www.google.com/search?q=https://github.com/arihel">GitHub</a> • <a href="https://www.google.com/search?q=https://linkedin.com/in/arihelsecron">LinkedIn</a>
