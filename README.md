@@ -1,6 +1,3 @@
-<p align="center">
-  <img src="https://via.placeholder.com/1200x400?text=BETKING+DESIGN+BANNER+AQUI" alt="BetKing Banner" width="100%">
-</p>
 
 <h1 align="center">🎰 BetKing - Discord Betting Bot</h1>
 
@@ -57,3 +54,53 @@ O projeto foi estruturado para facilitar a manutenção e garantir o isolamento 
 ├── main.py             # Orquestrador principal e carregador de Cogs
 ├── Dockerfile          # Containerização da aplicação
 └── requirements.txt    # Dependências do sistema
+```
+## 🎰 Lógica de Pagamento
+O bot utiliza o sistema de **Odds Dinâmicas**, garantindo que a casa nunca perca e que o prêmio seja proporcional ao risco:
+
+$$Prêmio = ValorApostado \times \left( \frac{PoteTotal}{TotalVencedor} \right)$$
+
+---
+
+## ⚙️ Instalação e Execução
+
+### 1. Clonar e Configurar
+```bash
+git clone https://github.com/arihel/betking-discord-bot.git
+cd betking-discord-bot
+```
+
+Crie um arquivo `.env` com seu token:
+`DISCORD_TOKEN=seu_token_aqui`
+
+### 2. Rodar via Docker (Recomendado)
+```bash
+docker build -t betking-bot .
+docker run -d --name betking -v "$(pwd)/cassino.db:/app/cassino.db" betking-bot
+```
+
+---
+
+## 🛡️ Foco em Cybersecurity
+Como estudante de Sistemas de Informação focado em segurança, o projeto implementa:
+
+* **Prevenção de SQL Injection:** Queries parametrizadas com placeholders `?`.
+* **Segurança de Credenciais:** Isolamento completo via variáveis de ambiente (`.env`).
+* **Integridade de Dados:** Sistema de estorno automático em caso de cancelamento de eventos.
+
+---
+
+<p align="center">
+  Desenvolvido com ☕ por <strong>Arihel Secron</strong><br>
+  <em>Motion Designer & Estudante de Sistemas de Informação</em><br><br>
+  <a href="[https://github.com/arihel](https://github.com/arihel)">GitHub</a> • <a href="[https://linkedin.com/in/arihelsecron](https://linkedin.com/in/arihelsecron)">LinkedIn</a>
+</p>
+
+
+
+Motion Designer & Bacharel de Sistemas de Informação
+
+
+
+<a href="https://www.google.com/search?q=https://github.com/arihel">GitHub</a> • <a href="https://www.google.com/search?q=https://linkedin.com/in/arihelsecron">LinkedIn</a>
+</p>
