@@ -96,6 +96,3 @@ Buscando um desenvolvimento focado em boas práticas de cibersegurança, o proje
   <a href="[https://github.com/arihel](https://github.com/arihel)">GitHub</a> • <a href="[https://linkedin.com/in/arihelsecron](https://linkedin.com/in/arihelsecron)">LinkedIn</a>
 </p>
 
-
-<a href="https://www.google.com/search?q=https://github.com/arihel">GitHub</a> • <a href="https://www.google.com/search?q=https://linkedin.com/in/arihelsecron">LinkedIn</a>
-</p>
