@@ -1,4 +1,3 @@
-
 <h1 align="center">🎰 BetKing - Discord Betting Bot</h1>
 
 <p align="center">
@@ -9,19 +8,21 @@
 </p>
 
 <p align="center">
-  <strong>Sistema modular de economia virtual e apostas dinâmicas projetado para alta performance e segurança.</strong>
+  <strong>Sistema modular de economia virtual e apostas automatizadas via API real, projetado para alta performance e segurança.</strong>
 </p>
 
 ---
 
 ## 📖 Sobre o Projeto
-O **BetKing** é um bot de Discord que implementa uma economia pulsante baseada em eventos. Utilizando uma arquitetura de **Cogs** para modularização e **SQLite** para persistência, ele oferece um mercado de apostas com **Odds Dinâmicas (Pari-Mutuel)**, onde o prêmio é ajustado automaticamente conforme o volume de apostas no pote.
+O **BetKing** é um bot de entretenimento que integra o mundo das apostas esportivas ao Discord. Através da conexão com a **API-Football**, o sistema monitora partidas de futebol em tempo real, automatizando o ciclo de vida de uma aposta: desde a abertura do mercado até o pagamento dos vencedores. 
+
+O projeto foi desenvolvido com foco em **Cybersecurity**, garantindo que as transações virtuais sejam íntegras e protegidas contra exploits comuns.
 
 ---
 
 ## 📸 Demonstração Visual
 > [!TIP]
-> **Atenção Designer:** Substitua o link abaixo pelo seu GIF de alta qualidade exportado do After Effects/Premiere para mostrar o bot em ação!
+> [PLACEHOLDER] GIF mostrando o bot respondendo aos comandos e o anúncio automático de novos jogos para impressionar quem visita seu repositório.
 
 <p align="center">
   <img src="https://via.placeholder.com/800x400?text=GIF+DEMONSTRATIVO+MOTION+DESIGN+AQUI" alt="Showcase do Bot" width="80%">
@@ -29,70 +30,63 @@ O **BetKing** é um bot de Discord que implementa uma economia pulsante baseada 
 
 ---
 
-## 🚀 Funcionalidades Principais
+## 🚀 Funcionalidades Completas
 
-| Módulo | Comando | Descrição |
-| :--- | :--- | :--- |
-| 💰 **Economia** | `/registrar` | Cria conta com bônus inicial de 1000 pontos. |
-| 💰 **Economia** | `/saldo` | Consulta privada de pontos (mensagem efêmera). |
-| 💰 **Economia** | `/transferir` | Envio seguro de pontos entre usuários. |
-| 🎲 **Apostas** | `/criar_evento` | [Admin] Abre novos mercados de apostas. |
-| 🎲 **Apostas** | `/apostar` | Participação em eventos com escolha de Opção A ou B. |
-| 🎲 **Apostas** | `/finalizar_evento` | [Admin] Encerra o mercado e paga os vencedores. |
-| 🛡️ **Gestão** | `/excluir_evento` | [Admin] Remove evento e **estorna os pontos** automaticamente. |
+### 💰 Sistema de Economia (Módulo do Usuário)
+* **`/registrar`**: Inicia a jornada do usuário, criando uma carteira digital com um bônus de boas-vindas de **1000 pontos**.
+* **`/saldo`**: Exibe o saldo atual do usuário de forma privada.
+* **`/resgatar_diario`**: Sistema de fidelização que concede **200 pontos** a cada 24 horas, controlado rigorosamente via Unix Timestamp para evitar resgates múltiplos.
+* **`/transferir`**: Permite a movimentação de pontos entre usuários do servidor, promovendo a interação social.
 
----
+### 🎲 Sistema de Apostas & Real-Time
+* **`/ver_eventos`**: Interface visual que lista todos os jogos disponíveis, exibindo os times, IDs e o volume de apostas atual.
+* **`/apostar`**: Permite escolher entre a Vitória do Time A, Time B ou o **Empate (Opção C)**. O sistema valida se o usuário possui saldo e se o evento ainda aceita entradas.
+* **Automação de Resultados**: O bot verifica periodicamente a API e, assim que uma partida encerra, identifica o vencedor, calcula os prêmios e notifica o canal automaticamente.
 
-## 🛠️ Arquitetura e Estrutura
-O projeto foi estruturado para facilitar a manutenção e garantir o isolamento de funções (Separação de Preocupações):
-
-```text
-├── 📁 cogs/             # Módulos de comandos independentes
-│   ├── economia.py      # Lógica financeira e carteira
-│   └── apostas.py       # Lógica de jogo e eventos
-├── database.py         # Conexão centralizada com SQLite
-├── main.py             # Orquestrador principal e carregador de Cogs
-├── Dockerfile          # Containerização da aplicação
-└── requirements.txt    # Dependências do sistema
-```
-## 🎰 Lógica de Pagamento
-O bot utiliza o sistema de **Odds Dinâmicas**, garantindo que a casa nunca perca e que o prêmio seja proporcional ao risco:
-
-$$Prêmio = ValorApostado \times \left( \frac{PoteTotal}{TotalVencedor} \right)$$
+### 🛡️ Comandos Administrativos (Gestão & Auditoria)
+* **`/criar_evento`**: Permite a abertura manual de mercados para eventos que não estão na API (ex: torneios internos).
+* **`/editar_evento`**: Ajusta nomes de times ou títulos de eventos já criados para correção de erros.
+* **`/excluir_evento`**: Comando de emergência que remove um mercado e realiza o **estorno automático** de todos os pontos apostados para os respectivos usuários.
+* **`/finalizar_evento`**: Fallback de segurança que permite ao Admin definir o vencedor manualmente em caso de instabilidade na API.
 
 ---
 
-## ⚙️ Instalação e Execução
+## 🏗️ Arquitetura e Segurança (Foco em Cybersecurity)
+Como um projeto de **Sistemas de Informação**, o BetKing implementa camadas de proteção críticas:
 
-### 1. Clonar e Configurar
-```bash
-git clone https://github.com/arihel/betking-discord-bot.git
-cd betking-discord-bot
-```
-
-Crie um arquivo `.env` com seu token:
-`DISCORD_TOKEN=seu_token_aqui`
-
-### 2. Rodar via Docker (Recomendado)
-```bash
-docker build -t betking-bot .
-docker run -d --name betking -v "$(pwd)/cassino.db:/app/cassino.db" betking-bot
-```
+1.  **Prevenção de SQL Injection**: Uso obrigatório de consultas parametrizadas (`?`) em todas as interações com o SQLite.
+2.  **Anti-Exploit Temporal**: O bot cruza o timestamp da API com o horário do servidor. Se um usuário tentar apostar em um jogo que já começou, a transação é recusada e o evento é fechado.
+3.  **Proteção de Variáveis Sensíveis**: Isolamento total de Tokens e Chaves de API via arquivo `.env`, impedindo vazamentos em logs de versionamento.
+4.  **Gerenciamento de Concorrência**: Configuração de `timeout` no banco de dados para suportar múltiplas apostas simultâneas sem corrupção de dados.
 
 ---
 
-## 🛡️ Foco em Cybersecurity
-Buscando um desenvolvimento focado em boas práticas de cibersegurança, o projeto implementa:
+## ⚙️ Estrutura do Repositório
+    ├── 📁 cogs/               # Módulos independentes (Cogs)
+    │   ├── economia.py        # Gestão financeira e recompensas
+    │   ├── apostas.py         # Comandos de jogo e administração
+    │   └── automacao.py       # Loop de API e verificação de resultados
+    ├── database.py           # Configuração de Schema e segurança do SQLite
+    ├── main.py               # Arquivo principal (Entry Point)
+    ├── iniciar_bot.bat       # Script de automação para Windows (Local)
+    ├── Dockerfile            # Configuração para deploy em containers
+    └── requirements.txt      # Dependências do projeto
 
-* **Prevenção de SQL Injection:** Queries parametrizadas com placeholders `?`.
-* **Segurança de Credenciais:** Isolamento completo via variáveis de ambiente (`.env`).
-* **Integridade de Dados:** Sistema de estorno automático em caso de cancelamento de eventos.
+---
+
+## 🛠️ Como Instalar e Rodar
+
+1.  **Clone o projeto**: `git clone https://github.com/arihel/betking-discord-bot.git`
+2.  **Variáveis**: Crie um `.env` com seu `DISCORD_TOKEN` e sua `API_SPORTS_KEY`.
+3.  **Ambiente**: Instale as dependências com `pip install -r requirements.txt`.
+4.  **Execução**:
+    * **Local**: Use o arquivo `iniciar_bot.bat` para carregar o ambiente automaticamente.
+    * **Docker**: `docker build -t betking . && docker run betking`
 
 ---
 
 <p align="center">
-  Desenvolvido com ☕ por <strong>Arihel Secron</strong><br>
-  <em>Motion Designer & Bacharel em Sistemas de Informação</em><br><br>
-  <a href="[https://github.com/arihel](https://github.com/arihel)">GitHub</a> • <a href="[https://linkedin.com/in/arihelsecron](https://linkedin.com/in/arihelsecron)">LinkedIn</a>
+  Desenvolvido por <strong>Arihel Secron</strong><br>
+  <em>Estudante de Cybersecurity & Sistemas de Informação</em><br><br>
+  <a href="https://github.com/arihel">GitHub</a> • <a href="https://linkedin.com/in/arihelsecron">LinkedIn</a>
 </p>
-
