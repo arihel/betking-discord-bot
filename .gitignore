@@ -2,3 +2,5 @@
 __pycache__/
 venv/
 *.db
+# Arquivos de execução local
+iniciar_bot.bat
